@@ -1,0 +1,164 @@
+version: 11 # Do not change this.
+#java-min-version: 17
+
+# Unique identifier for this server instance.
+# Used to prevent cross-server interference with homes and chests.
+# Change this if you have multiple servers sharing a database.
+server-id: survival-1
+
+# Database configuration
+# Supported types: mysql, mariadb, postgres, sqlite
+# Local supported: sqlite
+# host format: hostname:port
+db:
+  type: sqlite
+  host: 127.0.0.1:3306
+  name: advancedmarriage
+  user: root
+  pass: password
+  # Driver-level properties used for mysql connections.
+  # Defaults preserve old behavior while exposing secure tuning in config.
+  property:
+    check-server-certificate: true
+    use-ssl: true
+    encoding: utf8
+    timezone: 'Asia/Ho_Chi_Minh'
+    allow-public-key-retrieval: true
+  # Pool settings are applied for mysql/mariadb/postgres.
+  # SQLite ignores this block and uses direct short-lived connections.
+  pool-settings:
+    pool-name: AdvancedMarriagePool
+    maximum-pool-size: 10
+    minimum-idle: 10
+    connection-timeout: 5000
+    validation-timeout: 3000
+    idle-timeout: 600000
+    maximum-lifetime: 1800000 # 30 minutes
+    keepalive-time: 0
+    leak-detection-threshold: 0
+    initialization-fail-timeout: 1
+    auto-commit: true
+
+# Enable or disable features of the plugin.
+features:
+  home: true
+  tp: true
+  chest: true
+  pvp_toggle: true # if false, partners pvp will always be on.
+
+fallback:
+  text_render: auto # auto|minimessage|legacy
+  minimessage_fallback_to_legacy: true # If Component send is unavailable, serialize MiniMessage to legacy text.
+
+sync: #Database sync settings.
+  refresh_interval_seconds: 30
+
+chest:
+  cross_server_enabled: true
+  lock_ttl_seconds: 15
+  checkpoint_seconds: 5
+
+defaults:
+  chest_size: 36 # The shared chest inventory size. Must be a multiple of 9.
+  divorce_cooldown_minutes: 1440 # Time after divorce during which you cannot marry again.
+  marry_request_timeout_seconds: 300
+  teleport_countdown_seconds: 3 #applies to both teleporting to partner and teleporting to marry home.
+
+sounds:
+  countdown: BLOCK_NOTE_BLOCK_CHIME
+  teleport: ENTITY_ENDERMAN_TELEPORT
+  gui_click: UI_BUTTON_CLICK
+  request_received: ENTITY_EXPERIENCE_ORB_PICKUP
+  request_sent: UI_BUTTON_CLICK
+  marry_accepted: ENTITY_PLAYER_LEVELUP
+  marry_rejected: ENTITY_VILLAGER_NO
+  feature_toggled: UI_BUTTON_CLICK
+  marry_chat_message: ENTITY_EXPERIENCE_ORB_PICKUP
+  blocked: BLOCK_NOTE_BLOCK_BASS
+  marry_partner_online_sound: ENTITY_PLAYER_LEVELUP
+  marry_partner_offline_sound: ENTITY_PLAYER_BURP
+  # Set any sound key to 'none' to disable that event sound.
+
+# If enabled, players will be required to pay a cost to get married.
+marry_cost:
+  enabled: false
+  currency: "Vault" # Vault|PlayerPoints
+  amount: 1000
+
+# If enabled, players will receive buffs when
+# they attack their partner's killer
+# and gain a reward by killing them.
+# This only applies if the killer is a player
+# and the revenge system is enabled.
+revenge:
+  enabled: true
+  expire_hours: 24
+  trigger:
+    distance: 20
+    sound: "ENTITY_WITHER_SPAWN"
+    warning_cooldown_seconds: 60
+  buffs:
+    enabled: true
+    stackable: false
+    tiers:
+      1:
+        effects:
+          - type: SPEED
+            level: 1
+            duration: 200
+        #support %player% and %opponent% placeholders for commands.
+        console-commands: []
+        player-commands: []
+      2:
+        effects:
+          - type: SPEED
+            level: 1
+            duration: 200
+          - type: INCREASE_DAMAGE
+            level: 1
+            duration: 200
+        console-commands: []
+        player-commands: []
+  reward:
+    commands:
+      #- 'eco give %player% 500'
+    messages:
+      - '&cYou have avenged your partner!'
+
+# If enabled, a random configured message is broadcast when a marriage is completed.
+marry-broadcast:
+  enabled: true
+  message:
+    - '&dCongratulations &e{player1} &dand &e{player2} &djust got married!'
+    - '&dSend your blessings to &e{player1} &dand &e{player2}&d!'
+    - '&dAnother wedding happened! Congrats to &e{player1} &dand &e{player2}&d!'
+
+# Disable features in specific worlds.
+# Add world names to this list to block or allow
+# features in those worlds, depending on the filter type.
+# example:
+# tp:
+#   type: whitelist
+#   whitelist:
+#     - world_nether
+world_filters:
+  tp:
+    type: whitelist
+    whitelist: []
+    blacklist: []
+  chest:
+    type: whitelist
+    whitelist: []
+    blacklist: []
+  home:
+    type: whitelist
+    whitelist: []
+    blacklist: []
+  revenge:
+    type: whitelist
+    whitelist: []
+    blacklist: []
+  all_commands:
+    type: whitelist
+    whitelist: []
+    blacklist: []

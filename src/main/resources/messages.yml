@@ -1,0 +1,117 @@
+version: 6
+usage:
+  #support legacy colors.
+  root: "&eUsage: /marry <list|display|marry|accept|deny|cancel|divorce|chat|home|sethome|delhome|tp|tptoggle|pvptoggle|chest|seen|reload>"
+  marry: "&eUsage: /marry marry <player>"
+  display: "&eUsage: /marry display <player>"
+  accept: "&eUsage: /marry accept [player]"
+  deny: "&eUsage: /marry deny [player]"
+  divorce_confirm: "&cType &e/marry divorce confirm &cto confirm."
+
+# Support legacy and minimessage formats.
+error:
+  player_only: "&cOnly players can use this command."
+  no_permission: "&cYou do not have permission."
+  feature_disabled: "&cThis feature is disabled or unavailable."
+  database: "&cA database error occurred. Try again later."
+  commands_blocked_world: "&cPlugin commands are blocked in this world."
+
+marriage:
+  not_married: "&cYou are not married."
+  already_married: "&cOne of the players is already married."
+  success: "&aYou are now married with &e{partner}&a!"
+  success_admin: "&aMarriage created for &e{player1} &aand &e{player2}&a."
+
+marry:
+  self: "&cYou cannot marry yourself."
+  target_offline: "&cTarget player is offline."
+  request_sent: "&aMarriage request sent to &e{target}&a."
+  request_already_pending: "&cYou already have a pending request to &e{target}&c. Use &e/marry cancel&c first."
+  request_received: "&e{sender} &ahas sent you a marriage request."
+  request_received_rich: "<yellow>{sender}</yellow> <green>has sent you a marriage request.</green>"
+  # Clickable accept/deny options only work with paper and it's forks.
+  # For other platforms, the plain text version will be shown without hover/click events.
+  request_received_hint: "<click:run_command:'/marry accept {sender}'><hover:show_text:'<gray>Click to accept'><green>[ACCEPT]</green></hover></click> <click:run_command:'/marry deny {sender}'><hover:show_text:'<gray>Click to deny'><red>[DENY]</red></hover></click>"
+  no_request: "&cYou do not have a pending incoming request."
+  no_outgoing_request: "&cYou do not have a pending outgoing request."
+  no_request_from: "&cNo pending request found from &e{sender}&c."
+  request_player_not_found: "&cCould not find that player name."
+  multiple_requests: "&eYou have multiple requests from: &f{senders}&e. Use &f/marry accept <player>&e or &f/marry deny <player>&e."
+  request_denied: "&eYou denied the marriage request from &f{sender}&e."
+  request_denied_by_target: "&cYour marriage request was denied by &e{target}&c."
+  request_cancelled: "&eYour pending request to &f{target} &ehas been cancelled."
+  insufficient_funds: "&cYou need &e{amount}$&c to marry someone." #support {currency} placeholder
+  sender_insufficient_funds: "&cMarriage request from &e{sender}&c was cancelled because they do not have enough money."
+  cost_provider_unavailable: "&cMarriage cost provider is unavailable. Contact an admin."
+
+divorce:
+  success: "&cYou are now divorced."
+  cooldown: "&cYou are in divorce cooldown and cannot marry yet."
+  chest_not_empty: "&cShared chest must be empty before divorce."
+
+chat:
+  enabled: "&aPartner chat enabled."
+  disabled: "&ePartner chat disabled."
+  partner_format: "&d[Partner] {name}: {message}"
+
+home:
+  set: "&aShared home has been set."
+  deleted: "&eShared home removed."
+  not_set: "&cShared home is not set."
+  teleported: "&aTeleported to shared home."
+  wrong_server: "&cThis home belongs to another server-id."
+  world_missing: "&cHome world is missing."
+  world_blocked: "&cHome feature is blocked in this world."
+
+tp:
+  countdown: "&eTeleporting in &6{seconds}&e..."
+  success: "&aTeleported to your partner."
+  enabled: "&aYour partner can teleport to you now."
+  disabled: "&eYour partner can no longer teleport to you."
+  partner_blocked: "&cYour partner has disabled /marry tp access."
+  world_blocked: "&cTeleport is blocked in this world."
+  cancelled_move: "&cTeleport cancelled because you moved."
+  cancelled_damage: "&cTeleport cancelled because you took damage."
+
+pvp:
+  enabled: "&aPartner PvP enabled."
+  disabled: "&ePartner PvP disabled."
+
+chest:
+  title: "&5Shared Chest"
+  save_failed: "&cFailed to save shared chest."
+  wrong_server: "&cThis chest belongs to another server."
+  world_blocked: "&cShared chest is blocked in this world."
+  busy: "&cThis shared chest is currently being used on another server. Please try again later."
+  in_use: "&cCannot do this right now because the shared chest is in use on another server."
+
+seen:
+  online: "&a{partner} is online."
+  partner_offline: "&cYour partner is offline."
+  offline: "&e{partner} is offline for about {minutes} minute(s)."
+
+partner:
+  online: "&aYour partner {partner} is now online!"
+  offline: "&eYour partner {partner} has gone offline."
+
+revenge:
+  point_added: "&cRevenge updated: {killer} harmed your partner. Points: &e{points}"
+  radar_warning: "&4Alert: {killer} is close to you!"
+  completed: "&aRevenge complete against {killer}! (Points: {points})"
+
+admin:
+  reloaded: "&aAdvancedMarriage config and messages reloaded."
+
+display:
+  updated: "&aCouple display avatar updated."
+  must_be_partner: "&cYou can only pick yourself or your partner."
+
+gui:
+  couple_list_title: "&dCouples"
+  previous: "&ePrevious"
+  next: "&eNext"
+  page: "&fPage {current}/{total}"
+  couple_name: "&d{player1} &f❤ &d{player2}"
+  couple_lore:
+    - "&7{player1} + {player2}"
+    - "&7Married at: &f{date}"

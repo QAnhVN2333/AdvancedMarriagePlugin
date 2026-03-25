@@ -1,0 +1,22 @@
+name: AdvancedMarriage
+version: 1.0.0
+main: com.lyrinth.advancedmarriage.AdvancedMarriagePlugin
+api-version: 1.16
+authors: [ Lyrinth ]
+softdepend: [ Vault, PlayerPoints ]
+commands:
+  marry:
+    description: Main command for AdvancedMarriage
+    aliases: [ am, marriage ]
+    usage: /marry
+permissions:
+  advancedmarriage.admin:
+    default: op
+  advancedmarriage.priest:
+    default: op
+  advancedmarriage.home:
+    default: true
+  advancedmarriage.tp:
+    default: true
+  advancedmarriage.chest:
+    default: true
